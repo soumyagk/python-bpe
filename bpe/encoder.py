@@ -109,7 +109,7 @@ class Encoder:
     def fit(self, text):
         # type: (Encoder, Iterable[str]) -> None
         """ Learn vocab from text. """
-        _text = [l.lower().strip() for l in text]
+        _text = [l.strip() for l in text]
 
         # First, learn word vocab
         self.word_vocab = self.learn_word_vocab(_text)
@@ -156,7 +156,7 @@ class Encoder:
     def tokenize(self, sentence):
         # type: (Encoder, str) -> List[str]
         """ Split a sentence into word and subword tokens """
-        word_tokens = self.word_tokenizer(sentence.lower().strip())
+        word_tokens = self.word_tokenizer(sentence.strip())
 
         tokens = []
         for word_token in word_tokens:
@@ -173,7 +173,7 @@ class Encoder:
         direction = -1 if reverse else 1
         for sentence in self._progress_bar(sentences):
             encoded = []
-            tokens = list(self.tokenize(sentence.lower().strip()))
+            tokens = list(self.tokenize(sentence.strip()))
             for token in tokens:
                 if token in self.word_vocab:
                     encoded.append(self.word_vocab[token])
